@@ -15,11 +15,15 @@ const handleSubmit = async (e) => {
   let passwordValue = password.value;
   let popup = document.createElement("div");
 
-  if (validate === false) {
-    console.log("one or more values are messing");
+  if (validate(nameValue, emailValue, passwordValue) === false) {
     popup.className = "popup failure";
     popup.innerText="failure";
-    return
+    document.body.appendChild(popup);
+
+    setTimeout(() => {
+      document.body.removeChild(popup);
+    }, 3000);
+    return;
   }
   
   try {
@@ -29,7 +33,6 @@ const handleSubmit = async (e) => {
       password: passwordValue
     })
 
-    console.log("success");
 
     popup.className = "popup success";
     popup.innerText="success";
